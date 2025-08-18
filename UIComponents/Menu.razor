@@ -1,0 +1,12 @@
+﻿<div>This is a dropdown menu</div>
+
+<CascadingValue Value="this">
+    @ChildContent
+</CascadingValue>
+
+@code {
+    public MenuItems MenuItems { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

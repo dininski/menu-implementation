@@ -1,0 +1,15 @@
+@ChildContent
+
+@code {
+    [CascadingParameter]
+    private MenuItems Parent { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (Parent == null) throw new ArgumentException(nameof(MenuItems), "MenuItem must be placed within a MenuItems component");
+        base.OnInitialized();
+    }
+}
