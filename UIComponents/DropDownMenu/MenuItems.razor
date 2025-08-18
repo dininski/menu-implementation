@@ -1,10 +1,16 @@
+@namespace UIComponents.DropDownMenu
+
 <CascadingValue Value="this">
-    @ChildContent
+    <ul class="menu-root">
+        @ChildContent
+    </ul>
 </CascadingValue>
 
 @code {
     [CascadingParameter]
     private Menu Parent { get; set; }
+
+    private List<MenuItem> MenuItemsList { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
@@ -13,6 +19,13 @@
     {
         if (Parent == null) throw new ArgumentException(nameof(Parent), "MenuItems must be placed within a Menu component");
         base.OnInitialized();
-        Parent.MenuItems = this;
+        Parent.RegisterMenuItems(this);
+        MenuItemsList = new List<MenuItem>();
+    }
+
+    internal void RegisterMenuItem(MenuItem menuItem)
+    {
+        MenuItemsList.Add(menuItem);
+        StateHasChanged();
     }
 }

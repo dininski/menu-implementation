@@ -1,0 +1,24 @@
+﻿.menu-root {
+    display: flex;
+    gap: 16px;
+}
+
+    .menu-root > li.menu-item {
+        display: block;
+    }
+
+/* make the root nodes appear horizontally */
+.menu-root {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .menu-root > .menu-item {
+        position: relative;
+    }
+
+        /* simple horizontal spacing for root items */
+        .menu-root > .menu-item .menu-item-label {
+            padding: 10px 16px;
+        }

@@ -1,0 +1,53 @@
+@namespace UIComponents.DropDownMenu
+
+<li @onmouseover="OnMouseEnter" @onmouseout="OnMouseLeave">
+    @Text
+    IsOpen: @IsOpen
+    @ChildContent
+</li>
+
+@code {
+    [Parameter]
+    public String Text { get; set; }
+
+    [CascadingParameter]
+    private MenuItems Parent { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    private bool IsOpen { get; set; }
+
+    private System.Timers.Timer? closeTimer;
+
+    protected override void OnInitialized()
+    {
+        if (Parent == null) throw new ArgumentException(nameof(MenuItems), "MenuItem must be placed within a MenuItems component");
+        base.OnInitialized();
+        Parent.RegisterMenuItem(this);
+    }
+
+    public void OnMouseEnter()
+    {
+        // Cancel any pending close action
+        closeTimer?.Stop();
+        closeTimer = null;
+        IsOpen = true;
+        StateHasChanged();
+    }
+
+    public void OnMouseLeave()
+    {
+        // Delay closing slightly to allow moving between menu and submenu
+        closeTimer = new System.Timers.Timer(150);
+        closeTimer.Elapsed += (s, e) =>
+        {
+            closeTimer?.Stop();
+            closeTimer = null;
+            IsOpen = false;
+            InvokeAsync(StateHasChanged);
+        };
+        closeTimer.AutoReset = false;
+        closeTimer.Start();
+    }
+}

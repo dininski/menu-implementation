@@ -1,5 +1,7 @@
 .vs
-/BlazorApp1/bin
-/BlazorApp1/obj
-/UIComponents/bin
-/UIComponents/obj
+DemoApp/bin
+DemoApp/obj
+UIComponents/bin
+UIComponents/obj
+BlazorApp1/bin
+BlazorApp1/obj
