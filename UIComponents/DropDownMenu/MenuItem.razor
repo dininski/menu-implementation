@@ -2,8 +2,10 @@
 
 <li @onmouseover="OnMouseEnter" @onmouseout="OnMouseLeave">
     @Text
-    IsOpen: @IsOpen
-    @ChildContent
+    @if (IsOpen)
+    {
+        @ChildContent
+    }
 </li>
 
 @code {
@@ -24,7 +26,7 @@
     {
         if (Parent == null) throw new ArgumentException(nameof(MenuItems), "MenuItem must be placed within a MenuItems component");
         base.OnInitialized();
-        Parent.RegisterMenuItem(this);
+        Parent.RegisterMenuItem();
     }
 
     public void OnMouseEnter()

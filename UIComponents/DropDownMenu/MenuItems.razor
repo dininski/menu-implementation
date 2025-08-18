@@ -10,8 +10,6 @@
     [CascadingParameter]
     private Menu Parent { get; set; }
 
-    private List<MenuItem> MenuItemsList { get; set; }
-
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
@@ -19,13 +17,11 @@
     {
         if (Parent == null) throw new ArgumentException(nameof(Parent), "MenuItems must be placed within a Menu component");
         base.OnInitialized();
-        Parent.RegisterMenuItems(this);
-        MenuItemsList = new List<MenuItem>();
+        Parent.RegisterMenuItems();
     }
 
-    internal void RegisterMenuItem(MenuItem menuItem)
+    internal void RegisterMenuItem()
     {
-        MenuItemsList.Add(menuItem);
         StateHasChanged();
     }
 }

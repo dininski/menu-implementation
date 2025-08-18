@@ -3,24 +3,15 @@
 <div>This is a dropdown menu</div>
 
 <CascadingValue Value="this">
-    Total menu items: @MenuItems.Count
     @ChildContent
 </CascadingValue>
 
 @code {
-    private List<MenuItems> MenuItems { get; set; }
-
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
-    internal void RegisterMenuItems(MenuItems menuItems)
+    internal void RegisterMenuItems()
     {
-        MenuItems.Add(menuItems);
         StateHasChanged();
-    } 
-
-    public Menu()
-    {
-        MenuItems = new List<MenuItems>();
     }
 }
