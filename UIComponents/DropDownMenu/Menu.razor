@@ -1,11 +1,7 @@
 ﻿@namespace UIComponents.DropDownMenu
 
-<div>This is a dropdown menu</div>
-
-<CascadingValue Value="this">
-    <CascadingValue Value="0" Name="Level">
-        <div class="menu-root">@ChildContent</div>
-    </CascadingValue>
+<CascadingValue Value="0" Name="Level">
+    <div class="menu-root">@ChildContent</div>
 </CascadingValue>
 
 @code {

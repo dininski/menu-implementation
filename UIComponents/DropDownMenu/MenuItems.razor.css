@@ -8,6 +8,10 @@
     z-index: 1000;
 }
 
+.submenu-offset {
+    left: 50%;
+}
+
 .submenu .top-level {
     top: 100%;
     left: 0;
@@ -18,8 +22,9 @@
 
 /* deeper levels show to the right */
     .submenu .level {
+        position: relative;
         top: 0;
-        left: 0;
+        right: 0;
         padding: 0;
         margin: 0;
     }

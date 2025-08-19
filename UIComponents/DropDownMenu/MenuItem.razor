@@ -3,18 +3,17 @@
 <CascadingValue Value="@Level" Name="Level">
     <li class="menu-item" @onmouseover="OnMouseEnter" @onmouseout="OnMouseLeave">
         <div class="menu-item-label @(IsOpen ? "menu-item-active" : "")">@Text</div>
-        <div class="@(IsOpen ? "" : "hidden")">
+        @* <div class="@(IsOpen ? "" : "hidden")">@ChildContent</div> *@
+        @if (IsOpen)
+        {
             @ChildContent
-        </div>
+        }
     </li>
 </CascadingValue>
 
 @code {
     [Parameter]
     public String Text { get; set; }
-
-    [CascadingParameter]
-    private MenuItems Parent { get; set; }
 
     [CascadingParameter]
     private MenuItems Level { get; set; }
@@ -25,13 +24,6 @@
     private bool IsOpen { get; set; }
 
     private System.Timers.Timer? closeTimer;
-
-    protected override void OnInitialized()
-    {
-        if (Parent == null) throw new ArgumentException(nameof(MenuItems), "MenuItem must be placed within a MenuItems component");
-        base.OnInitialized();
-        Parent.RegisterMenuItem();
-    }
 
     public void OnMouseEnter()
     {

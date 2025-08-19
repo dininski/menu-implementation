@@ -1,19 +1,14 @@
 @namespace UIComponents.DropDownMenu
 
-<CascadingValue Value="this">
-    <CascadingValue Value="@(Level + 1)" Name="Level">
-        <div class="submenu">
-            <ul class="@(Level == 0 ? "top-level" : "level")">
-                @ChildContent
-            </ul>
-        </div>
-    </CascadingValue>
+<CascadingValue Value="@(Level + 1)" Name="Level">
+    <div class="submenu @(Level == 0 ? "": "submenu-offset")">
+        <ul class="@(Level == 0 ? "top-level" : "level")">
+            @ChildContent
+        </ul>
+    </div>
 </CascadingValue>
 
 @code {
-    [CascadingParameter]
-    private Menu Parent { get; set; }
-
     [CascadingParameter(Name = "Level")]
     private int Level { get; set; }
 
@@ -22,13 +17,6 @@
 
     protected override void OnInitialized()
     {
-        if (Parent == null) throw new ArgumentException(nameof(Parent), "MenuItems must be placed within a Menu component");
         base.OnInitialized();
-        Parent.RegisterMenuItems();
-    }
-
-    internal void RegisterMenuItem()
-    {
-        StateHasChanged();
     }
 }
