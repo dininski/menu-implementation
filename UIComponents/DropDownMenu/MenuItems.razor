@@ -1,14 +1,21 @@
 @namespace UIComponents.DropDownMenu
 
 <CascadingValue Value="this">
-    <ul class="menu-root">
-        @ChildContent
-    </ul>
+    <CascadingValue Value="@(Level + 1)" Name="Level">
+        <div class="submenu">
+            <ul class="@(Level == 0 ? "top-level" : "level")">
+                @ChildContent
+            </ul>
+        </div>
+    </CascadingValue>
 </CascadingValue>
 
 @code {
     [CascadingParameter]
     private Menu Parent { get; set; }
+
+    [CascadingParameter(Name = "Level")]
+    private int Level { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }

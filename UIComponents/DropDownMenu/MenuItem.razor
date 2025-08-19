@@ -1,12 +1,13 @@
 @namespace UIComponents.DropDownMenu
 
-<li @onmouseover="OnMouseEnter" @onmouseout="OnMouseLeave">
-    @Text
-    @if (IsOpen)
-    {
-        @ChildContent
-    }
-</li>
+<CascadingValue Value="@Level" Name="Level">
+    <li class="menu-item" @onmouseover="OnMouseEnter" @onmouseout="OnMouseLeave">
+        <div class="menu-item-label @(IsOpen ? "menu-item-active" : "")">@Text</div>
+        <div class="@(IsOpen ? "" : "hidden")">
+            @ChildContent
+        </div>
+    </li>
+</CascadingValue>
 
 @code {
     [Parameter]
@@ -14,6 +15,9 @@
 
     [CascadingParameter]
     private MenuItems Parent { get; set; }
+
+    [CascadingParameter]
+    private MenuItems Level { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }

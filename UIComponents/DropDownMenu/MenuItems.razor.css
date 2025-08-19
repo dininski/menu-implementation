@@ -1,0 +1,30 @@
+.submenu {
+    position: absolute;
+    min-width: 160px;
+    border: 1px solid #ddd;
+    background: white;
+    padding: 6px 0;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    z-index: 1000;
+}
+
+.submenu .top-level {
+    top: 100%;
+    left: 0;
+    display: inline-flex;
+    padding: 0;
+    margin: 0;
+}
+
+/* deeper levels show to the right */
+    .submenu .level {
+        top: 0;
+        left: 0;
+        padding: 0;
+        margin: 0;
+    }
+
+/* general submenu item styling */
+.submenu .menu-item-label {
+    padding: 10px 18px;
+}

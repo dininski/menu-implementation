@@ -3,7 +3,9 @@
 <div>This is a dropdown menu</div>
 
 <CascadingValue Value="this">
-    @ChildContent
+    <CascadingValue Value="0" Name="Level">
+        <div class="menu-root">@ChildContent</div>
+    </CascadingValue>
 </CascadingValue>
 
 @code {

@@ -3,41 +3,20 @@
     position: relative;
 }
 
+.menu-item-active {
+    color: red;
+}
+
 .menu-item-label {
     padding: 8px 14px;
     cursor: pointer;
     white-space: nowrap;
 }
 
-    .menu-item-label:hover {
-        background: #f0f0f0;
-    }
-
-.submenu {
-    position: absolute;
-    min-width: 160px;
-    border: 1px solid #ddd;
-    background: white;
-    padding: 6px 0;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    z-index: 1000;
+.hidden {
+    display: none;
 }
 
-    .submenu.level-0 {
-        top: 100%;
-        left: 0;
-    }
-
-    /* deeper levels show to the right */
-    .submenu.level-1,
-    .submenu.level-2,
-    .submenu.level-3,
-    .submenu.level-4 {
-        top: 0;
-        left: 100%;
-    }
-
-    /* general submenu item styling */
-    .submenu .menu-item-label {
-        padding: 10px 18px;
+    .menu-item-label:hover {
+        background: #f0f0f0;
     }
