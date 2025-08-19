@@ -11,6 +11,8 @@
     padding: 8px 14px;
     cursor: pointer;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
 }
 
 .hidden {
@@ -20,3 +22,9 @@
     .menu-item-label:hover {
         background: #f0f0f0;
     }
+
+.oi-menu-icon {
+    height: 1em;
+    margin-left: 10px;
+    color: lightgrey;
+}

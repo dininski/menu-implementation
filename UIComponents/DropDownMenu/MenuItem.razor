@@ -1,25 +1,30 @@
 @namespace UIComponents.DropDownMenu
 
-<CascadingValue Value="@Level" Name="Level">
-    <li class="menu-item" @onmouseover="OnMouseEnter" @onmouseout="OnMouseLeave">
-        <div class="menu-item-label @(IsOpen ? "menu-item-active" : "")">@Text</div>
-        @* <div class="@(IsOpen ? "" : "hidden")">@ChildContent</div> *@
-        @if (IsOpen)
-        {
-            @ChildContent
-        }
-    </li>
-</CascadingValue>
+<li class="menu-item" @onmouseover="OnMouseEnter" @onmouseout="OnMouseLeave">
+    <CascadingValue Value="this" Name="MenuItem">
+
+        <div class="menu-item-label @(IsOpen ? "menu-item-active" : "")">
+            @Text
+            @if (hasChildren)
+            {
+                <i class="oi-menu-icon oi oi-chevron-right"></i>
+            }
+        </div>
+        <div class="@(IsOpen ? "" : "hidden")">@ChildContent</div>
+    </CascadingValue>
+</li>
 
 @code {
     [Parameter]
-    public String Text { get; set; }
-
-    [CascadingParameter]
-    private MenuItems Level { get; set; }
+    public required String Text { get; set; }
 
     [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    public RenderFragment? ChildContent { get; set; }
+
+    [CascadingParameter(Name = "MenuItems")]
+    public MenuItems MenuItems { get; set; }
+
+    private bool hasChildren = false;
 
     private bool IsOpen { get; set; }
 
@@ -48,4 +53,11 @@
         closeTimer.AutoReset = false;
         closeTimer.Start();
     }
+
+    public void RegisterChildMenu()
+    {
+        hasChildren = true;
+        StateHasChanged();
+    }
+
 }

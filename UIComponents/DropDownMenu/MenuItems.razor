@@ -1,22 +1,26 @@
 @namespace UIComponents.DropDownMenu
 
 <CascadingValue Value="@(Level + 1)" Name="Level">
-    <div class="submenu @(Level == 0 ? "": "submenu-offset")">
-        <ul class="@(Level == 0 ? "top-level" : "level")">
-            @ChildContent
-        </ul>
-    </div>
-</CascadingValue>
+        <div class="submenu @(Level == 0 ? "" : "submenu-offset")">
+            <ul class="@(Level == 0 ? "top-level" : "level")">
+                @ChildContent
+            </ul>
+        </div>
+    </CascadingValue>
 
 @code {
     [CascadingParameter(Name = "Level")]
     private int Level { get; set; }
 
+    [CascadingParameter(Name = "MenuItem")]
+    private MenuItem ParentMenuItems { get; set; }
+
     [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    public RenderFragment? ChildContent { get; set; }
 
     protected override void OnInitialized()
     {
+        this.ParentMenuItems?.RegisterChildMenu();
         base.OnInitialized();
     }
 }
